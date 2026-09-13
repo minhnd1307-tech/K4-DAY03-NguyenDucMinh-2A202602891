@@ -32,13 +32,55 @@ class MockOfflineProvider(BaseLLMProvider):
         self.model_name = "Offline-Mock-Model-2026"
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
+        prompt_lower = prompt.lower()
+        if "vinfast" in prompt_lower or "nghỉ phép" in prompt_lower or "bảo hiểm" in prompt_lower:
+            return (
+                "[Mock Chatbot Response]: Xin chào! Tại VinFast, nhân viên chính thức có 12 ngày phép năm/năm "
+                "và được hưởng chế độ Bảo hiểm Sức khỏe Vingroup (PTI Care toàn diện). "
+                "(Lưu ý: Chế độ Chatbot Baseline không kết nối cơ sở dữ liệu thời gian thực để tra cứu cá nhân)."
+            )
         return f"[Mock Chatbot Response]: Xin chào! Tôi đã nhận được câu hỏi '{prompt}'. (Chế độ Chatbot không có Tool tra cứu dữ liệu thời gian thực)."
 
     def generate_with_tools(self, prompt: str, tools_schema: List[Dict[str, Any]], system_prompt: str = "") -> Dict[str, Any]:
         prompt_lower = prompt.lower()
         
-        # Mô phỏng nhận diện intent gọi Tool
-        if "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
+        # Mô phỏng nhận diện intent gọi Tool cho Đề tài 2.1 (VinFast HR)
+        if "vf2026001" in prompt_lower and ("nghỉ phép" in prompt_lower or "tạo đơn" in prompt_lower or "đơn xin" in prompt_lower):
+            return {
+                "type": "tool_call",
+                "tool_name": "create_leave_request",
+                "arguments": {
+                    "employee_id": "VF2026001",
+                    "leave_type": "Nghỉ phép năm",
+                    "start_date": "15/09/2026 đến 16/09/2026",
+                    "duration_days": 2,
+                    "reason": "Giải quyết việc gia đình"
+                },
+                "thought": "Người dùng yêu cầu tạo đơn xin nghỉ phép năm cho nhân viên VF2026001. Tôi sẽ gọi tool create_leave_request."
+            }
+        elif "vf2026002" in prompt_lower and ("nghỉ phép" in prompt_lower or "kiểm tra" in prompt_lower or "tạo đơn" in prompt_lower):
+            return {
+                "type": "tool_call",
+                "tool_name": "hr_leave_query",
+                "arguments": {"employee_id": "VF2026002"},
+                "thought": "Cần kiểm tra số ngày phép còn lại của nhân viên VF2026002 trước khi tạo đơn nghỉ phép. Tôi sẽ gọi tool hr_leave_query."
+            }
+        elif "vf9999999" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "hr_leave_query",
+                "arguments": {"employee_id": "VF9999999"},
+                "thought": "Người dùng muốn tra cứu thông tin nhân sự với mã VF9999999. Tôi sẽ gọi tool hr_leave_query."
+            }
+        elif "vf2026001" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "hr_leave_query",
+                "arguments": {"employee_id": "VF2026001"},
+                "thought": "Người dùng muốn tra cứu thông tin nhân sự và số ngày phép của nhân viên VF2026001. Tôi sẽ gọi tool hr_leave_query."
+            }
+        # Mô phỏng nhận diện intent gọi Tool gốc (VinUni Academic)
+        elif "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
             return {
                 "type": "tool_call",
                 "tool_name": "schedule_appointment",
@@ -55,8 +97,11 @@ class MockOfflineProvider(BaseLLMProvider):
         else:
             return {
                 "type": "text",
-                "content": f"[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-                "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool."
+                "content": (
+                    "[Mock Agent Response]: Xin chào! Chính sách nhân sự VinFast quy định nhân viên chính thức "
+                    "được hưởng 12 ngày phép năm và chế độ bảo hiểm sức khỏe Vingroup PTI Care toàn diện."
+                ),
+                "thought": "Câu hỏi chung về chính sách nghỉ phép và bảo hiểm VinFast, trả lời trực tiếp không cần gọi Tool."
             }
 
 

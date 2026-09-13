@@ -28,20 +28,52 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 [
   {
     "step": 1,
+    "query": "Hãy tra cứu thông tin nhân sự và số ngày phép còn lại của nhân viên VF2026001.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "hr_leave_query",
     "arguments": {
-      "student_id": "SV2026001"
+      "employee_id": "VF2026001"
     },
     "observation": {
       "status": "SUCCESS",
-      "student_id": "SV2026001",
+      "employee_id": "VF2026001",
       "data": {
-        "full_name": "Nguyễn Văn An",
-        "gpa": 3.85
-      }
+        "full_name": "Nguyễn Đức Minh",
+        "department": "Khối Nghiên cứu & Phát triển Xe điện (VinFast R&D)",
+        "position": "Kỹ sư Tác tử AI (AI Agent Engineer)",
+        "email": "minh.nd@vinfast.vn",
+        "annual_leave_balance": 12,
+        "insurance_tier": "Bảo hiểm Sức khỏe Vingroup VIP (PTI Toàn diện)",
+        "manager": "Ông Lê Hoàng Nam - Trưởng phòng R&D"
+      },
+      "message": "Thông tin nhân viên VF2026001 (Nguyễn Đức Minh): Thuộc Khối Nghiên cứu & Phát triển Xe điện (VinFast R&D), chức vụ Kỹ sư Tác tử AI (AI Agent Engineer). Số ngày phép năm còn lại: 12 ngày. Gói phúc lợi: Bảo hiểm Sức khỏe Vingroup VIP (PTI Toàn diện). Quản lý trực tiếp: Ông Lê Hoàng Nam - Trưởng phòng R&D."
     },
-    "latency_ms": 120.5
+    "latency_ms": 2294.16
+  },
+  {
+    "step": 1,
+    "query": "Hãy tạo đơn xin nghỉ phép năm cho nhân viên VF2026001 từ ngày 15/09/2026 đến ngày 16/09/2026 (2 ngày) với lý do 'Giải quyết việc gia đình'.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "create_leave_request",
+    "arguments": {
+      "reason": "Giải quyết việc gia đình",
+      "duration_days": 2,
+      "start_date": "15/09/2026",
+      "employee_id": "VF2026001",
+      "leave_type": "Nghỉ phép năm"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "request_id": "LR-VF2026001-2026",
+      "employee_id": "VF2026001",
+      "employee_name": "Nguyễn Đức Minh",
+      "leave_type": "Nghỉ phép năm",
+      "start_date": "15/09/2026",
+      "duration_days": 2,
+      "reason": "Giải quyết việc gia đình",
+      "message": "Tạo đơn xin nghỉ phép thành công cho Nguyễn Đức Minh (VF2026001): Loại 'Nghỉ phép năm', thời gian: 15/09/2026 (2 ngày). Lý do: 'Giải quyết việc gia đình'. Đơn đã được chuyển đến Quản lý trực tiếp để xét duyệt."
+    },
+    "latency_ms": 2894.49
   }
 ]
 ```
@@ -50,10 +82,10 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
-- [ ] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
-- **Tổng số Test Cases đã chạy thành công:** ___ / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác:** ___ lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
+- [x] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (`gemini-3.6-flash`).
+- **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác:** 4 / 4 lượt gọi Tool (TC02, TC03, TC04, TC05).
+- **Kết quả đẩy Repo nộp bài:** [x] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
 
 ---
 

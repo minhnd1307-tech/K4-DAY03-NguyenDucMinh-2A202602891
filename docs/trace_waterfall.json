@@ -1,29 +1,130 @@
 [
   {
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
+    "query": "Chào bạn, bạn có thể cho tôi biết chính sách nghỉ phép năm và chế độ phúc lợi bảo hiểm chung tại VinFast được quy định như thế nào không?",
     "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 0.63
+    "thought": "Câu hỏi chung về chính sách nghỉ phép và bảo hiểm VinFast, trả lời trực tiếp không cần gọi Tool.",
+    "output": "[Mock Agent Response]: Xin chào! Chính sách nhân sự VinFast quy định nhân viên chính thức được hưởng 12 ngày phép năm và chế độ bảo hiểm sức khỏe Vingroup PTI Care toàn diện.",
+    "latency_ms": 1211.13
   },
   {
     "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu thông tin nhân sự và số ngày phép còn lại của nhân viên VF2026001.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "hr_leave_query",
     "arguments": {
-      "student_id": "SV2026001"
+      "employee_id": "VF2026001"
     },
-    "observation": {},
-    "latency_ms": 0.0
+    "observation": {
+      "status": "SUCCESS",
+      "employee_id": "VF2026001",
+      "data": {
+        "full_name": "Nguyễn Đức Minh",
+        "department": "Khối Nghiên cứu & Phát triển Xe điện (VinFast R&D)",
+        "position": "Kỹ sư Tác tử AI (AI Agent Engineer)",
+        "email": "minh.nd@vinfast.vn",
+        "annual_leave_balance": 12,
+        "insurance_tier": "Bảo hiểm Sức khỏe Vingroup VIP (PTI Toàn diện)",
+        "manager": "Ông Lê Hoàng Nam - Trưởng phòng R&D"
+      },
+      "message": "Thông tin nhân viên VF2026001 (Nguyễn Đức Minh): Thuộc Khối Nghiên cứu & Phát triển Xe điện (VinFast R&D), chức vụ Kỹ sư Tác tử AI (AI Agent Engineer). Số ngày phép năm còn lại: 12 ngày. Gói phúc lợi: Bảo hiểm Sức khỏe Vingroup VIP (PTI Toàn diện). Quản lý trực tiếp: Ông Lê Hoàng Nam - Trưởng phòng R&D."
+    },
+    "latency_ms": 417.91
   },
   {
     "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu thông tin nhân sự và số ngày phép còn lại của nhân viên VF2026001.",
     "action_type": "FINAL_ANSWER",
     "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
+    "output": "Thông tin nhân viên VF2026001 (Nguyễn Đức Minh): Thuộc Khối Nghiên cứu & Phát triển Xe điện (VinFast R&D), chức vụ Kỹ sư Tác tử AI (AI Agent Engineer). Số ngày phép năm còn lại: 12 ngày. Gói phúc lợi: Bảo hiểm Sức khỏe Vingroup VIP (PTI Toàn diện). Quản lý trực tiếp: Ông Lê Hoàng Nam - Trưởng phòng R&D.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Hãy tạo đơn xin nghỉ phép năm cho nhân viên VF2026001 từ ngày 15/09/2026 đến ngày 16/09/2026 (2 ngày) với lý do 'Giải quyết việc gia đình'.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "create_leave_request",
+    "arguments": {
+      "employee_id": "VF2026001",
+      "leave_type": "Nghỉ phép năm",
+      "start_date": "15/09/2026 đến 16/09/2026",
+      "duration_days": 2,
+      "reason": "Giải quyết việc gia đình"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "request_id": "LR-VF2026001-2026",
+      "employee_id": "VF2026001",
+      "employee_name": "Nguyễn Đức Minh",
+      "leave_type": "Nghỉ phép năm",
+      "start_date": "15/09/2026 đến 16/09/2026",
+      "duration_days": 2,
+      "reason": "Giải quyết việc gia đình",
+      "message": "Tạo đơn xin nghỉ phép thành công cho Nguyễn Đức Minh (VF2026001): Loại 'Nghỉ phép năm', thời gian: 15/09/2026 đến 16/09/2026 (2 ngày). Lý do: 'Giải quyết việc gia đình'. Đơn đã được chuyển đến Quản lý trực tiếp để xét duyệt."
+    },
+    "latency_ms": 477.29
+  },
+  {
+    "step": 2,
+    "query": "Hãy tạo đơn xin nghỉ phép năm cho nhân viên VF2026001 từ ngày 15/09/2026 đến ngày 16/09/2026 (2 ngày) với lý do 'Giải quyết việc gia đình'.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Tạo đơn xin nghỉ phép thành công cho Nguyễn Đức Minh (VF2026001): Loại 'Nghỉ phép năm', thời gian: 15/09/2026 đến 16/09/2026 (2 ngày). Lý do: 'Giải quyết việc gia đình'. Đơn đã được chuyển đến Quản lý trực tiếp để xét duyệt.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Hãy kiểm tra xem nhân viên VF2026002 hiện còn bao nhiêu ngày phép năm, nếu còn từ 2 ngày trở lên thì hãy giúp tạo đơn nghỉ phép 2 ngày bắt đầu từ ngày 20/09/2026 với lý do 'Nghỉ dưỡng sức'.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "hr_leave_query",
+    "arguments": {
+      "employee_id": "VF2026002"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "employee_id": "VF2026002",
+      "data": {
+        "full_name": "Trần Thị Bình",
+        "department": "Khối Vận hành Sản xuất & Chuỗi cung ứng (VinFast Manufacturing)",
+        "position": "Chuyên viên Quản lý Chất lượng QC",
+        "email": "binh.tt@vinfast.vn",
+        "annual_leave_balance": 5,
+        "insurance_tier": "Bảo hiểm Sức khỏe Vingroup Tiêu chuẩn",
+        "manager": "Bà Nguyễn Thu Trang - Quản đốc Phân xưởng"
+      },
+      "message": "Thông tin nhân viên VF2026002 (Trần Thị Bình): Thuộc Khối Vận hành Sản xuất & Chuỗi cung ứng (VinFast Manufacturing), chức vụ Chuyên viên Quản lý Chất lượng QC. Số ngày phép năm còn lại: 5 ngày. Gói phúc lợi: Bảo hiểm Sức khỏe Vingroup Tiêu chuẩn. Quản lý trực tiếp: Bà Nguyễn Thu Trang - Quản đốc Phân xưởng."
+    },
+    "latency_ms": 420.07
+  },
+  {
+    "step": 2,
+    "query": "Hãy kiểm tra xem nhân viên VF2026002 hiện còn bao nhiêu ngày phép năm, nếu còn từ 2 ngày trở lên thì hãy giúp tạo đơn nghỉ phép 2 ngày bắt đầu từ ngày 20/09/2026 với lý do 'Nghỉ dưỡng sức'.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Thông tin nhân viên VF2026002 (Trần Thị Bình): Thuộc Khối Vận hành Sản xuất & Chuỗi cung ứng (VinFast Manufacturing), chức vụ Chuyên viên Quản lý Chất lượng QC. Số ngày phép năm còn lại: 5 ngày. Gói phúc lợi: Bảo hiểm Sức khỏe Vingroup Tiêu chuẩn. Quản lý trực tiếp: Bà Nguyễn Thu Trang - Quản đốc Phân xưởng.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Hãy tra cứu thông tin nhân sự và số ngày phép của nhân viên có mã VF9999999.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "hr_leave_query",
+    "arguments": {
+      "employee_id": "VF9999999"
+    },
+    "observation": {
+      "status": "NOT_FOUND",
+      "employee_id": "VF9999999",
+      "message": "Không tìm thấy thông tin nhân viên có mã 'VF9999999' trong hệ thống nhân sự VinFast."
+    },
+    "latency_ms": 401.13
+  },
+  {
+    "step": 2,
+    "query": "Hãy tra cứu thông tin nhân sự và số ngày phép của nhân viên có mã VF9999999.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Không tìm thấy thông tin nhân viên có mã 'VF9999999' trong hệ thống nhân sự VinFast.",
     "latency_ms": 10.0
   }
 ]
