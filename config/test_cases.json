@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Chào bạn, bạn có thể cho tôi biết chính sách nghỉ phép năm và chế độ phúc lợi bảo hiểm chung tại VinFast được quy định như thế nào không?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ System Prompt về chính sách nghỉ phép chung của VinFast, không cần gọi bất kỳ Tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu thông tin nhân sự và số ngày phép còn lại của nhân viên VF2026001.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu nhân sự, tự động kích hoạt Tool Call 'hr_leave_query' với mã nhân viên VF2026001.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "appointment_booking",
+    "question": "Hãy tạo đơn xin nghỉ phép năm cho nhân viên VF2026001 từ ngày 15/09/2026 đến ngày 16/09/2026 (2 ngày) với lý do 'Giải quyết việc gia đình'.",
+    "expected_behavior": "Agent tự động phát sinh Tool Call 'create_leave_request' với đầy đủ mã nhân viên, loại nghỉ phép, thời gian và lý do.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Hãy kiểm tra xem nhân viên VF2026002 hiện còn bao nhiêu ngày phép năm, nếu còn từ 2 ngày trở lên thì hãy giúp tạo đơn nghỉ phép 2 ngày bắt đầu từ ngày 20/09/2026 với lý do 'Nghỉ dưỡng sức'.",
+    "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct đa bước: Tra cứu số ngày phép trước, đánh giá điều kiện, sau đó tiến hành tạo đơn nghỉ phép tương ứng.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Hãy tra cứu thông tin nhân sự và số ngày phép của nhân viên có mã VF9999999.",
+    "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool và đưa ra phản hồi lịch sự, chính xác rằng không tìm thấy nhân viên trong hệ thống VinFast mà không bịa đặt dữ liệu.",
+    "complexity": "Medium"
+  }
+]

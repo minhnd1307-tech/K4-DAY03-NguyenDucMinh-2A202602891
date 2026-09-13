@@ -1,8 +1,8 @@
 # 📊 BÁO CÁO THU HOẠCH NGHIỆM THU BÀI LAB 3 (BƯỚC 3 — SUBMISSION ARTIFACT)
 
-> **Họ và Tên Học viên:** [Điền Họ và Tên]  
-> **Mã Sinh Viên / Mã Học viên:** [Điền MSSV]  
-> **Chủ đề Lựa chọn:** [Điền tên chủ đề đã chọn từ docs/DANH_SACH_DE_TAI.md hoặc Đề tài Mở]  
+> **Họ và Tên Học viên:** Nguyễn Đức Minh  
+> **Mã Sinh Viên / Mã Học viên:** 2A202602891  
+> **Chủ đề Lựa chọn:** Gợi ý 2.1: Trợ lý Nhân sự VinFast (HR Assistant) — Tra cứu ngày phép còn lại, chính sách bảo hiểm và tạo đơn xin nghỉ phép  
 
 ---
 
@@ -10,11 +10,11 @@
 
 | Tiêu chí Đánh giá | Mức độ (1 - 5) | Giải trình chi tiết lý do chọn điểm |
 | :--- | :---: | :--- |
-| **1. Multi-step Reasoning** | / 5 | Bài toán có yêu cầu chia nhỏ nhiều bước suy luận nối tiếp nhau không? |
-| **2. Tool Interaction** | / 5 | Hệ thống có cần kết nối với MCP Server / Cơ sở dữ liệu bên ngoài không? |
-| **3. Dynamic Decision** | / 5 | Bước tiếp theo có phụ thuộc vào kết quả quan sát bước trước không? |
-| **4. Long Horizon Goal** | / 5 | Hệ thống có phải giữ mục tiêu xuyên suốt qua nhiều lượt xử lý không? |
-| **TỔNG ĐIỂM AGENTIC FIT** | **/ 20** | *Nếu tổng điểm > 12/20: Bài toán rất phù hợp triển khai Agentic System.* |
+| **1. Multi-step Reasoning** | 4 / 5 | Yêu cầu nghiệp vụ nhân sự thường gồm nhiều bước suy luận liên hoàn: Trước khi duyệt tạo đơn nghỉ phép cần tra cứu số ngày phép tồn, kiểm tra thời gian hợp lệ và quyền hạn phê duyệt của quản lý. |
+| **2. Tool Interaction** | 5 / 5 | Bắt buộc phải tích hợp với hệ thống phần mềm quản lý nhân sự (HRMS) thông qua MCP Server để truy vấn dữ liệu ngày phép/bảo hiểm thực tế và lưu đơn xin nghỉ phép vào database. |
+| **3. Dynamic Decision** | 4 / 5 | Quyết định hành động tiếp theo phụ thuộc trực tiếp vào Observation từ bước trước: Nếu nhân viên còn đủ ngày phép thì tiến hành tạo đơn; nếu vượt quá số ngày phép cho phép thì đề xuất chuyển sang nghỉ không lương hoặc yêu cầu điều chỉnh ngày. |
+| **4. Long Horizon Goal** | 4 / 5 | Hệ thống phải duy trì ngữ cảnh và mục tiêu xuyên suốt phiên làm việc (hoàn tất quy trình nộp đơn nghỉ phép), đồng thời xử lý các tình huống biên như mã nhân viên không hợp lệ hoặc thiếu thông tin lý do. |
+| **TỔNG ĐIỂM AGENTIC FIT** | **17 / 20** | *Tổng điểm 17/20 (> 12/20): Bài toán nghiệp vụ rất phù hợp để triển khai Agentic System với ReAct Loop.* |
 
 ---
 
